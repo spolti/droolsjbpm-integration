@@ -38,6 +38,8 @@ public class KieServerConstants {
     // kie server dedicated parameters
     public static final String KIE_SERVER_ID = "org.kie.server.id";
     public static final String KIE_SERVER_LOCATION = "org.kie.server.location";
+    // intended to be used on OpenShift or for kieServer instances behind a firewall/balancer
+    public static final String KIE_SERVER_PUBLIC_LOCATION = "org.kie.server.public.location";
     public static final String KIE_SERVER_JAAS_DOMAIN = "org.kie.server.domain";
     public static final String KIE_SERVER_CONTROLLER = "org.kie.server.controller";
     public static final String KIE_SERVER_STATE_REPO = "org.kie.server.repo";

@@ -184,6 +184,10 @@ public class KieControllerStartupIntegrationTest extends KieControllerManagement
 
     @Test
     public void testContainerDisposedAfterStartup() throws Exception {
+
+    }
+
+    private void containerDisposedAfterStartup(boolean publicLocation) throws Exception {
         // Getting info from currently started kie server.
         ServiceResponse<KieServerInfo> kieServerInfo = client.getServerInfo();
         assertEquals(ServiceResponse.ResponseType.SUCCESS, kieServerInfo.getType());
@@ -191,7 +195,8 @@ public class KieControllerStartupIntegrationTest extends KieControllerManagement
 
         // Create container.
         ServerTemplate serverTemplate = new ServerTemplate(kieServerInfo.getResult().getServerId(), kieServerInfo.getResult().getName());
-        serverTemplate.addServerInstance(ModelFactory.newServerInstanceKey(serverTemplate.getId(), kieServerInfo.getResult().getLocation()));
+        String publicUrl = publicLocation ? kieServerInfo.getResult().getPublicLocation() : "";
+        serverTemplate.addServerInstance(ModelFactory.newServerInstanceKey(serverTemplate.getId(), kieServerInfo.getResult().getLocation(), publicUrl));
         controllerClient.saveServerTemplate(serverTemplate);
         ContainerSpec containerSpec = new ContainerSpec(CONTAINER_ID, CONTAINER_ID, serverTemplate, RELEASE_ID, KieContainerStatus.STOPPED, new HashMap<Capability, ContainerConfig>());
         controllerClient.saveContainerSpec(kieServerInfo.getResult().getServerId(), containerSpec);

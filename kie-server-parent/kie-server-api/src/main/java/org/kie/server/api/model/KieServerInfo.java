@@ -30,6 +30,7 @@ public class KieServerInfo {
 
     private String name;
     private String location;
+    private String publicLocation;
 
     private List<String> capabilities;
 
@@ -45,13 +46,14 @@ public class KieServerInfo {
         this.version = version;
     }
 
-    public KieServerInfo(String serverId, String name, String version, List<String> capabilities, String location) {
+    public KieServerInfo(String serverId, String name, String version, List<String> capabilities, String location, String publicLocation) {
         super();
         this.serverId = serverId;
         this.name = name;
         this.version = version;
         this.capabilities = capabilities;
         this.location = location;
+        this.publicLocation = publicLocation;
     }
 
     @XmlElement(name="version")
@@ -97,6 +99,15 @@ public class KieServerInfo {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @XmlElement(name="public-location")
+    public String getPublicLocation() {
+        return publicLocation;
+    }
+
+    public void setPublicLocation(String publicLocation) {
+        this.publicLocation = publicLocation;
     }
 
     @XmlElement(name="messages")

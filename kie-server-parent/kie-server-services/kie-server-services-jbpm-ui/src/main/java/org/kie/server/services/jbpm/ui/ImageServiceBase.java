@@ -11,7 +11,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
+ */
 
 package org.kie.server.services.jbpm.ui;
 
@@ -33,7 +33,6 @@ import org.jbpm.services.api.model.ProcessInstanceDesc;
 import org.kie.api.runtime.query.QueryContext;
 import org.kie.server.api.KieServerConstants;
 import org.kie.server.services.api.KieServerRegistry;
-import org.kie.server.services.impl.KieContainerInstanceImpl;
 import org.kie.server.services.impl.locator.ContainerLocatorProvider;
 import org.kie.server.services.jbpm.ui.img.ImageReference;
 import org.slf4j.Logger;
@@ -60,12 +59,13 @@ public class ImageServiceBase {
         if (!this.kieServerLocation.endsWith("/")) {
             this.kieServerLocation = kieServerLocation + "/";
         }
+
     }
 
     private byte[] getProcessImageAsBytes(String containerId, String processId) {
 
         ProcessDefinition procDef = dataService.getProcessesByDeploymentIdProcessId(containerId, processId);
-        if( procDef == null ) {
+        if (procDef == null) {
             throw new IllegalArgumentException("No process found for " + processId + " within container " + containerId);
         }
 
@@ -75,7 +75,7 @@ public class ImageServiceBase {
         }
         // get SVG String
         byte[] imageSVG = imageReferenceMap.get(containerId).getImageContent(location, processId);
-        if( imageSVG == null ) {
+        if (imageSVG == null) {
             logger.warn("Could not find SVG image file for process '" + processId + "' within container " + containerId);
             return null;
         }

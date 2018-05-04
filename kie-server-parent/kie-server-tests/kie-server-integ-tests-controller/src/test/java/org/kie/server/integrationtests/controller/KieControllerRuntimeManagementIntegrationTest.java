@@ -119,6 +119,7 @@ public abstract class KieControllerRuntimeManagementIntegrationTest<T extends Ki
         ServerInstanceKey serverInstance = new ServerInstanceKey("not-existing",
                                                                  "not-existing",
                                                                  "not-existing",
+                                                                 "not-existing",
                                                                  "not-existing");
         try {
             controllerClient.getContainers(serverInstance);

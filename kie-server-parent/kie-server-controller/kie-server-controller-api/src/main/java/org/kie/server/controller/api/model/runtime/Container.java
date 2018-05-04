@@ -90,7 +90,7 @@ public class Container extends ContainerKey {
     }
 
     public ServerInstanceKey getServerInstanceKey() {
-        return new ServerInstanceKey(getServerTemplateId(), serverInstanceId, serverInstanceId, getUrl());
+        return new ServerInstanceKey(getServerTemplateId(), serverInstanceId, serverInstanceId, getUrl(), getPublicUrl());
     }
 
     public KieContainerStatus getStatus() {

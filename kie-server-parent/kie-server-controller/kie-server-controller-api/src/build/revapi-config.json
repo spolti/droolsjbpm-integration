@@ -155,6 +155,46 @@
           "methodName": "getContainers",
           "elementKind": "method",
           "justification": "New method for getting list of containers by server template"
+        },
+        {
+          "code": "java.method.numberOfParametersChanged",
+          "old": "method org.kie.server.controller.api.model.runtime.ServerInstanceKey org.kie.server.controller.api.ModelFactory::newServerInstanceKey(java.lang.String, java.lang.String)",
+          "new": "method org.kie.server.controller.api.model.runtime.ServerInstanceKey org.kie.server.controller.api.ModelFactory::newServerInstanceKey(java.lang.String, java.lang.String, java.lang.String)",
+          "package": "org.kie.server.controller.api",
+          "classSimpleName": "ModelFactory",
+          "methodName": "newServerInstanceKey",
+          "elementKind": "method",
+          "justification": "<<<<< ADD YOUR EXPLANATION FOR THE NECESSITY OF THIS CHANGE >>>>>"
+        },
+        {
+          "code": "java.method.numberOfParametersChanged",
+          "old": "method void org.kie.server.controller.api.model.runtime.ServerInstance::<init>(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Collection<org.kie.server.api.model.Message>, java.util.Collection<org.kie.server.controller.api.model.runtime.Container>)",
+          "new": "method void org.kie.server.controller.api.model.runtime.ServerInstance::<init>(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Collection<org.kie.server.api.model.Message>, java.util.Collection<org.kie.server.controller.api.model.runtime.Container>)",
+          "package": "org.kie.server.controller.api.model.runtime",
+          "classSimpleName": "ServerInstance",
+          "methodName": "<init>",
+          "elementKind": "constructor",
+          "justification": "<<<<< ADD YOUR EXPLANATION FOR THE NECESSITY OF THIS CHANGE >>>>>"
+        },
+        {
+          "code": "java.method.numberOfParametersChanged",
+          "old": "method void org.kie.server.controller.api.model.runtime.ServerInstanceKey::<init>(java.lang.String, java.lang.String, java.lang.String, java.lang.String)",
+          "new": "method void org.kie.server.controller.api.model.runtime.ServerInstanceKey::<init>(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)",
+          "package": "org.kie.server.controller.api.model.runtime",
+          "classSimpleName": "ServerInstanceKey",
+          "methodName": "<init>",
+          "elementKind": "constructor",
+          "justification": "<<<<< ADD YOUR EXPLANATION FOR THE NECESSITY OF THIS CHANGE >>>>>"
+        },
+        {
+          "code": "java.method.numberOfParametersChanged",
+          "old": "method void org.kie.server.controller.api.model.KieServerInstanceInfo::<init>(java.lang.String, org.kie.server.controller.api.model.KieServerStatus, java.util.List<java.lang.String>)",
+          "new": "method void org.kie.server.controller.api.model.KieServerInstanceInfo::<init>(java.lang.String, java.lang.String, org.kie.server.controller.api.model.KieServerStatus, java.util.List<java.lang.String>)",
+          "package": "org.kie.server.controller.api.model",
+          "classSimpleName": "KieServerInstanceInfo",
+          "methodName": "<init>",
+          "elementKind": "constructor",
+          "justification": "ADD YOUR EXPLANATION FOR THE NECESSITY OF THIS CHANGE"
         }
       ]
     }

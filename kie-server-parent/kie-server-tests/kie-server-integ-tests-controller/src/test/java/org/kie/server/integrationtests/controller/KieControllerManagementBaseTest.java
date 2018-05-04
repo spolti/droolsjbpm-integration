@@ -102,7 +102,16 @@ public abstract class KieControllerManagementBaseTest extends RestOnlyBaseIntegr
     protected ServerTemplate createServerTemplate(String id, String name, String location) {
         ServerTemplate serverTemplate = new ServerTemplate(id, name);
 
-        serverTemplate.addServerInstance(ModelFactory.newServerInstanceKey(serverTemplate.getId(), location));
+        serverTemplate.addServerInstance(ModelFactory.newServerInstanceKey(serverTemplate.getId(), location, ""));
+        controllerClient.saveServerTemplate(serverTemplate);
+
+        return serverTemplate;
+    }
+
+    protected ServerTemplate createServerTemplateWithPublicLocation(String id, String name, String location, String publicLocation) {
+        ServerTemplate serverTemplate = new ServerTemplate(id, name);
+
+        serverTemplate.addServerInstance(ModelFactory.newServerInstanceKey(serverTemplate.getId(), location, publicLocation));
         controllerClient.saveServerTemplate(serverTemplate);
 
         return serverTemplate;

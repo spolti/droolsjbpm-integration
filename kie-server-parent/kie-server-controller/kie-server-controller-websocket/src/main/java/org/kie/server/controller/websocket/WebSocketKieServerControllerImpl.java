@@ -103,7 +103,7 @@ public class WebSocketKieServerControllerImpl extends KieServerControllerImpl {
         synchronized (manager) {
             String url = manager.removeSession(session);
             if (url != null) {
-                KieServerInfo serverInfo = new KieServerInfo(serverId, "", "", Collections.<String>emptyList(), url);
+                KieServerInfo serverInfo = new KieServerInfo(serverId, "", "", Collections.<String>emptyList(), url, "");
                 disconnect(serverInfo);
                 logger.info("Server with id '{}' disconnected", serverId);
             }

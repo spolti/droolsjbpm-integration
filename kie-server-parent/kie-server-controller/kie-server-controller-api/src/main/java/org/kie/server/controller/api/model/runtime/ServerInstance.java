@@ -44,10 +44,11 @@ public class ServerInstance extends ServerInstanceKey {
             final String serverName,
             final String serverInstanceId,
             final String url,
+            final String publicUrl,
             final String version,
             final Collection<Message> status,
             final Collection<Container> containers ) {
-        super( serverTemplateId, serverName, serverInstanceId, url );
+        super( serverTemplateId, serverName, serverInstanceId, url, publicUrl);
         this.version = version;
         this.messages.addAll( status );
         this.containers.addAll( containers );

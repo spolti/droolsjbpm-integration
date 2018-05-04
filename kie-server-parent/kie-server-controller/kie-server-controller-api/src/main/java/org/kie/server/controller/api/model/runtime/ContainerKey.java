@@ -32,6 +32,8 @@ public class ContainerKey {
     private String containerName;
     @XmlElement(name="url")
     private String url;
+    @XmlElement(name="public-url")
+    private String publicUrl;
 
     public ContainerKey() {
 
@@ -44,6 +46,7 @@ public class ContainerKey {
         this.containerSpecId = containerSpecId;
         this.containerName = containerName;
         this.url = serverInstanceKey.getUrl();
+        this.publicUrl = serverInstanceKey.getPublicUrl();
     }
 
     public String getContainerName() {
@@ -62,6 +65,10 @@ public class ContainerKey {
         return url;
     }
 
+    public String getPublicUrl() {
+        return publicUrl;
+    }
+
     public void setServerTemplateId(String serverTemplateId) {
         this.serverTemplateId = serverTemplateId;
     }
@@ -78,6 +85,10 @@ public class ContainerKey {
         this.url = url;
     }
 
+    public void setPublicUrl(String publicUrl) {
+        this.publicUrl = publicUrl;
+    }
+
     @Override
     public String toString() {
         return "ContainerKey{" +
@@ -85,6 +96,7 @@ public class ContainerKey {
                 ", containerSpecId='" + containerSpecId + '\'' +
                 ", containerName='" + containerName + '\'' +
                 ", url='" + url + '\'' +
+                ", publicUrl='" + publicUrl + '\'' +
                 '}';
     }
 

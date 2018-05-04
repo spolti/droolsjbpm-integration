@@ -32,15 +32,18 @@ public class ServerInstanceKey {
     private String serverTemplateId;
     @XmlElement(name = "server-url")
     private String url;
+    @XmlElement(name = "public-server-url")
+    private String publicUrl;
 
     public ServerInstanceKey() {
     }
 
-    public ServerInstanceKey(String serverTemplateId, String serverName, String serverInstanceId, String url) {
+    public ServerInstanceKey(String serverTemplateId, String serverName, String serverInstanceId, String url, String publicUrl) {
         this.serverTemplateId = serverTemplateId;
         this.serverName = serverName;
         this.serverInstanceId = serverInstanceId;
         this.url = url;
+        this.publicUrl = null != publicUrl ? publicUrl: url;
     }
 
     public String getServerTemplateId() {
@@ -59,6 +62,10 @@ public class ServerInstanceKey {
         return url;
     }
 
+    public String getPublicUrl() {
+        return null == publicUrl | publicUrl.isEmpty() ? url : publicUrl;
+    }
+
     public void setServerInstanceId(String serverInstanceId) {
         this.serverInstanceId = serverInstanceId;
     }
@@ -75,6 +82,10 @@ public class ServerInstanceKey {
         this.url = url;
     }
 
+    public void setPublicUrl(String publicUrl) {
+        this.publicUrl = publicUrl;
+    }
+
     @Override
     public String toString() {
         return "ServerInstanceKey{" +
@@ -82,6 +93,7 @@ public class ServerInstanceKey {
                 ", serverName='" + serverName + '\'' +
                 ", serverTemplateId='" + serverTemplateId + '\'' +
                 ", url='" + url + '\'' +
+                ", publicUrl='" + publicUrl + '\'' +
                 '}';
     }
 
@@ -108,6 +120,9 @@ public class ServerInstanceKey {
         if (url != null ? !url.equals(that.url) : that.url != null) {
             return false;
         }
+        if (publicUrl != null ? !publicUrl.equals(that.publicUrl) : that.publicUrl != null) {
+            return false;
+        }
 
         return true;
     }
@@ -118,6 +133,7 @@ public class ServerInstanceKey {
         result = 31 * result + (serverName != null ? serverName.hashCode() : 0);
         result = 31 * result + (serverTemplateId != null ? serverTemplateId.hashCode() : 0);
         result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + (publicUrl != null ? publicUrl.hashCode() : 0);
         return result;
     }
 

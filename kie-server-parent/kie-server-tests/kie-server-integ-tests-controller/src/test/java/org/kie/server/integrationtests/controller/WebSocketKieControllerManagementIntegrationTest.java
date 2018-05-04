@@ -82,7 +82,8 @@ public class WebSocketKieControllerManagementIntegrationTest extends KieControll
         ServerInstanceKey serverInstanceKey = new ServerInstanceKey(serverTemplate.getId(),
                                                                           "serverName",
                                                                           "serverInstanceId",
-                                                                          "url");
+                                                                          "url",
+                                                                          "publicUrl");
 
         serverTemplate.addServerInstance(serverInstanceKey);
         assertEquals(2, serverTemplate.getServerInstanceKeys().size());

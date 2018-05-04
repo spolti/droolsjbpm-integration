@@ -73,7 +73,7 @@ public class RestKieServerControllerImpl extends KieServerControllerImpl {
 
         KieServerInfo serverInfo = null;
         try {
-            serverInfo = new KieServerInfo(id, "", "", Collections.<String>emptyList(), URLDecoder.decode(serverLocation, "UTF-8"));
+            serverInfo = new KieServerInfo(id, "", "", Collections.<String>emptyList(), URLDecoder.decode(serverLocation, "UTF-8"), "");
             disconnect(serverInfo);
             logger.info("Server with id '{}' disconnected", id);
         } catch (UnsupportedEncodingException e) {

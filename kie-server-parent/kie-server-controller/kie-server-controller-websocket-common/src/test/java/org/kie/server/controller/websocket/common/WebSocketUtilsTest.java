@@ -16,9 +16,6 @@
 
 package org.kie.server.controller.websocket.common;
 
-import java.util.Arrays;
-import java.util.Collections;
-
 import org.junit.Test;
 import org.kie.server.api.model.KieContainerStatus;
 import org.kie.server.api.model.KieScannerStatus;
@@ -29,14 +26,12 @@ import org.kie.server.controller.api.model.KieServerControllerServiceResponse;
 import org.kie.server.controller.api.model.runtime.Container;
 import org.kie.server.controller.api.model.runtime.ContainerList;
 import org.kie.server.controller.api.model.runtime.ServerInstanceKey;
-import org.kie.server.controller.api.model.spec.Capability;
-import org.kie.server.controller.api.model.spec.ContainerConfig;
-import org.kie.server.controller.api.model.spec.ContainerSpec;
-import org.kie.server.controller.api.model.spec.ProcessConfig;
-import org.kie.server.controller.api.model.spec.RuleConfig;
+import org.kie.server.controller.api.model.spec.*;
 import org.kie.server.controller.api.service.SpecManagementService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Collections;
 
 import static org.junit.Assert.*;
 
@@ -139,7 +134,8 @@ public class WebSocketUtilsTest {
         final ServerInstanceKey serverInstanceKey = new ServerInstanceKey("serverTemplateId",
                                                                           "serverName",
                                                                           "serverInstanceId",
-                                                                          "url");
+                                                                          "url",
+                                                                          "publicUrl");
         final ReleaseId releaseId = new ReleaseId("group",
                                                   "artifact",
                                                   "version");

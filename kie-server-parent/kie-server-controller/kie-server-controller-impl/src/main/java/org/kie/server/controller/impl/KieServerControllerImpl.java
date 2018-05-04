@@ -67,7 +67,7 @@ public abstract class KieServerControllerImpl implements KieServerController {
 
         ServerTemplate serverTemplate = templateStorage.load(serverInfo.getServerId());
         KieServerSetup serverSetup = new KieServerSetup();
-        ServerInstanceKey serverInstanceKey = ModelFactory.newServerInstanceKey(serverInfo.getServerId(), serverInfo.getLocation());
+        ServerInstanceKey serverInstanceKey = ModelFactory.newServerInstanceKey(serverInfo.getServerId(), serverInfo.getLocation(), serverInfo.getPublicLocation());
         List<Container> containerList = new ArrayList<Container>();
 
         if (serverTemplate != null) {
@@ -213,7 +213,7 @@ public abstract class KieServerControllerImpl implements KieServerController {
 
             if (serverTemplate != null) {
                 logger.info("Server {} disconnected from controller", serverInfo.getLocation());
-                ServerInstanceKey serverInstanceKey = ModelFactory.newServerInstanceKey(serverInfo.getServerId(), serverInfo.getLocation());
+                ServerInstanceKey serverInstanceKey = ModelFactory.newServerInstanceKey(serverInfo.getServerId(), serverInfo.getLocation(), serverInfo.getPublicLocation());
                 serverTemplate.deleteServerInstance(serverInstanceKey.getServerInstanceId());
 
                 templateStorage.update(serverTemplate);

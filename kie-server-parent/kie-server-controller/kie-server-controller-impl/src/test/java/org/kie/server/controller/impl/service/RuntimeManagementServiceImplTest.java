@@ -56,7 +56,7 @@ public class RuntimeManagementServiceImplTest extends AbstractServiceImplTest {
 
         assertEquals(0, found.getServerInstanceKeys().length);
 
-        serverTemplate.addServerInstance(new ServerInstanceKey(serverTemplate.getId(), "test server","instanceId" , "http://fake.url.org"));
+        serverTemplate.addServerInstance(new ServerInstanceKey(serverTemplate.getId(), "test server","instanceId" , "http://fake.url.org", "http://fake-public-url.org"));
         specManagementService.saveServerTemplate(serverTemplate);
 
         found = runtimeManagementService.getServerInstances(serverTemplate.getId());
@@ -71,13 +71,14 @@ public class RuntimeManagementServiceImplTest extends AbstractServiceImplTest {
         assertEquals("instanceId", server.getServerInstanceId());
         assertEquals("test server", server.getServerName());
         assertEquals("http://fake.url.org", server.getUrl());
+        assertEquals("http://fake-public-url.org", server.getPublicUrl());
     }
 
     @Test
     public void testGetContainersByInstance() {
         when(kieServerInstanceManager.getContainers(any(ServerInstanceKey.class))).thenReturn(singletonList(container));
 
-        org.kie.server.controller.api.model.runtime.ServerInstanceKey instanceKey = new ServerInstanceKey("instanceId", "test server", serverTemplate.getId(), "http://fake.url.org");
+        org.kie.server.controller.api.model.runtime.ServerInstanceKey instanceKey = new ServerInstanceKey("instanceId", "test server", serverTemplate.getId(), "http://fake.url.org", "http://fake-public-url.org");
         serverTemplate.addServerInstance(instanceKey);
         specManagementService.saveServerTemplate(serverTemplate);
 
@@ -90,10 +91,35 @@ public class RuntimeManagementServiceImplTest extends AbstractServiceImplTest {
     }
 
     @Test
+    public void testDefaultPublicKieLocation() {
+        ServerInstanceKeyList found = runtimeManagementService.getServerInstances(serverTemplate.getId());
+        assertNotNull(found);
+
+        assertEquals(0, found.getServerInstanceKeys().length);
+
+        serverTemplate.addServerInstance(new ServerInstanceKey(serverTemplate.getId(), "test server","instanceId" , "http://fake.url.org", ""));
+        specManagementService.saveServerTemplate(serverTemplate);
+
+        found = runtimeManagementService.getServerInstances(serverTemplate.getId());
+        assertNotNull(found);
+
+        assertEquals(1, found.getServerInstanceKeys().length);
+
+        org.kie.server.controller.api.model.runtime.ServerInstanceKey server = found.getServerInstanceKeys()[0];
+        assertNotNull(server);
+
+        assertEquals(serverTemplate.getId(), server.getServerTemplateId());
+        assertEquals("instanceId", server.getServerInstanceId());
+        assertEquals("test server", server.getServerName());
+        assertEquals("http://fake.url.org", server.getUrl());
+        assertEquals("http://fake.url.org", server.getPublicUrl());
+    }
+
+    @Test
     public void testGetContainersByTemplate() {
         when(kieServerInstanceManager.getContainers(any(), any())).thenReturn(singletonList(container));
 
-        org.kie.server.controller.api.model.runtime.ServerInstanceKey instanceKey = new ServerInstanceKey("instanceId", "test server", serverTemplate.getId(), "http://fake.url.org");
+        org.kie.server.controller.api.model.runtime.ServerInstanceKey instanceKey = new ServerInstanceKey("instanceId", "test server", serverTemplate.getId(), "http://fake.url.org", "http://fake-public-url.org");
         serverTemplate.addServerInstance(instanceKey);
         specManagementService.saveServerTemplate(serverTemplate);
 

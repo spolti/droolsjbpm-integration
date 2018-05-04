@@ -28,6 +28,8 @@ public class KieServerInstanceInfo {
 
     @XmlElement(name = "location")
     private String location;
+    @XmlElement(name = "publicLocation")
+    private String publicLocation;
     @XmlElement(name = "status")
     private KieServerStatus status;
 
@@ -37,8 +39,9 @@ public class KieServerInstanceInfo {
     public KieServerInstanceInfo() {
     }
 
-    public KieServerInstanceInfo(String location, KieServerStatus status, List<String> capabilities) {
+    public KieServerInstanceInfo(String location, String publicLocation, KieServerStatus status, List<String> capabilities) {
         this.location = location;
+        this.publicLocation = publicLocation;
         this.status = status;
         this.capabilities = capabilities;
     }
@@ -49,6 +52,14 @@ public class KieServerInstanceInfo {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getPublicLocation() {
+        return publicLocation;
+    }
+
+    public void setPublicLocation(String publicLocation) {
+        this.publicLocation = publicLocation;
     }
 
     public KieServerStatus getStatus() {

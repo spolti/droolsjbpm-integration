@@ -91,12 +91,50 @@ public class ContainerConfigPropagationIntegrationTest extends KieControllerMana
         assertTrue(containsConfigItem(containerInfo.getResult(), KieServerConstants.PCFG_MERGE_MODE, "MERGE_COLLECTION", KieServerConstants.CAPABILITY_BPM));
     }
 
+    @Test
+    public void testPropagateProcessContainerConfigWithPublicLocation() throws Exception {
+        ServerTemplate serverTemplate = createServerTemplateWithPublicLocation();
+
+        Map<Capability, ContainerConfig> containerConfigMap = new HashMap<>();
+
+        ProcessConfig processConfig = new ProcessConfig("PER_PROCESS_INSTANCE", "kieBase", "kieSession", "MERGE_COLLECTION");
+        containerConfigMap.put(Capability.PROCESS, processConfig);
+
+        ContainerSpec containerToDeploy = new ContainerSpec(CONTAINER_ID, CONTAINER_NAME, serverTemplate, RELEASE_ID, KieContainerStatus.STARTED, containerConfigMap);
+        controllerClient.saveContainerSpec(serverTemplate.getId(), containerToDeploy);
+
+        KieServerSynchronization.waitForKieServerSynchronization(client, 1);
+
+        ServiceResponse<KieContainerResource> containerInfo = client.getContainerInfo(CONTAINER_ID);
+        assertEquals(ServiceResponse.ResponseType.SUCCESS, containerInfo.getType());
+        assertEquals(CONTAINER_ID, containerInfo.getResult().getContainerId());
+        assertEquals(KieContainerStatus.STARTED, containerInfo.getResult().getStatus());
+
+        assertEquals(4, containerInfo.getResult().getConfigItems().size());
+        assertTrue(containsConfigItem(containerInfo.getResult(), KieServerConstants.PCFG_RUNTIME_STRATEGY, "PER_PROCESS_INSTANCE", KieServerConstants.CAPABILITY_BPM));
+        assertTrue(containsConfigItem(containerInfo.getResult(), KieServerConstants.PCFG_KIE_BASE, "kieBase", KieServerConstants.CAPABILITY_BPM));
+        assertTrue(containsConfigItem(containerInfo.getResult(), KieServerConstants.PCFG_KIE_SESSION, "kieSession", KieServerConstants.CAPABILITY_BPM));
+        assertTrue(containsConfigItem(containerInfo.getResult(), KieServerConstants.PCFG_MERGE_MODE, "MERGE_COLLECTION", KieServerConstants.CAPABILITY_BPM));
+    }
+
+
     private ServerTemplate createServerTemplate() {
         ServerTemplate serverTemplate = new ServerTemplate();
         serverTemplate.setId(kieServerInfo.getServerId());
         serverTemplate.setName(kieServerInfo.getName());
 
-        serverTemplate.addServerInstance(ModelFactory.newServerInstanceKey(serverTemplate.getId(), kieServerInfo.getLocation()));
+        serverTemplate.addServerInstance(ModelFactory.newServerInstanceKey(serverTemplate.getId(), kieServerInfo.getLocation(), ""));
+        controllerClient.saveServerTemplate(serverTemplate);
+
+        return serverTemplate;
+    }
+
+    private ServerTemplate createServerTemplateWithPublicLocation() {
+        ServerTemplate serverTemplate = new ServerTemplate();
+        serverTemplate.setId(kieServerInfo.getServerId());
+        serverTemplate.setName(kieServerInfo.getName());
+
+        serverTemplate.addServerInstance(ModelFactory.newServerInstanceKey(serverTemplate.getId(), kieServerInfo.getLocation(), kieServerInfo.getPublicLocation()));
         controllerClient.saveServerTemplate(serverTemplate);
 
         return serverTemplate;

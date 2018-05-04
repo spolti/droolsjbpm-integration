@@ -83,6 +83,8 @@ public class KieServerImpl implements KieServer {
     private final KieServerStateRepository repository;
     // TODO figure out how to get actual URL of the kie server
     private String kieServerLocation = System.getProperty(KieServerConstants.KIE_SERVER_LOCATION, "http://localhost:8230/kie-server/services/rest/server");
+    // if not set defaults to kieServerLocation
+    private String kieServerPublicLocation = System.getProperty(KieServerConstants.KIE_SERVER_PUBLIC_LOCATION, kieServerLocation);
     private volatile AtomicBoolean kieServerActive = new AtomicBoolean(false);
     private volatile AtomicBoolean kieServerReady = new AtomicBoolean(false);
 
@@ -197,7 +199,7 @@ public class KieServerImpl implements KieServer {
             capabilities.add(extension.getImplementedCapability());
         }
 
-        return new KieServerInfo(serverId, serverName, versionStr, capabilities, kieServerLocation);
+        return new KieServerInfo(serverId, serverName, versionStr, capabilities, kieServerLocation, kieServerPublicLocation);
     }
 
     public ServiceResponse<KieServerInfo> getInfo() {

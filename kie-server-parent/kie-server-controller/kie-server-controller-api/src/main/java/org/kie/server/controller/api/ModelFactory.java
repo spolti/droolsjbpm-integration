@@ -22,8 +22,7 @@ import org.kie.server.controller.api.model.runtime.ServerInstanceKey;
 
 public class ModelFactory {
 
-
-    public static ServerInstanceKey newServerInstanceKey(String serverTemplateId, String url) {
+    public static ServerInstanceKey newServerInstanceKey(String serverTemplateId, String url, String publicUrl) {
         try {
             URL serverUrl = new URL(url);
             String serverInstanceId = null;
@@ -32,7 +31,7 @@ public class ModelFactory {
             } else {
                 serverInstanceId = serverTemplateId + "@" + serverUrl.getHost() + ":" + serverUrl.getPort();
             }
-            return new ServerInstanceKey(serverTemplateId, serverInstanceId, serverInstanceId, url);
+            return new ServerInstanceKey(serverTemplateId, serverInstanceId, serverInstanceId, url, publicUrl);
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException("Invalid server url " + url);
         }

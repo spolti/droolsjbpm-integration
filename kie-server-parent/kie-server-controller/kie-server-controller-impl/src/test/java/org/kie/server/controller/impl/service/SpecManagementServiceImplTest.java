@@ -739,7 +739,8 @@ public class SpecManagementServiceImplTest extends AbstractServiceImplTest {
         final ServerInstanceKey serverInstanceKey = new ServerInstanceKey(serverTemplate.getId(),
                                                                           "serverName",
                                                                           "serverInstanceId",
-                                                                          "url");
+                                                                          "url",
+                                                                          "publicUrl");
 
         serverTemplate.addServerInstance(serverInstanceKey);
         specManagementService.saveServerTemplate(serverTemplate);
@@ -760,7 +761,8 @@ public class SpecManagementServiceImplTest extends AbstractServiceImplTest {
         final ServerInstanceKey serverInstanceKey = new ServerInstanceKey(serverTemplate.getId(),
                                                                           "serverName",
                                                                           "serverInstanceId",
-                                                                          "url");
+                                                                          "url",
+                                                                          "publicUrl");
 
         serverTemplate.addServerInstance(serverInstanceKey);
         specManagementService.saveServerTemplate(serverTemplate);

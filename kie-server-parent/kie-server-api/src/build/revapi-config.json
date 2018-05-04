@@ -207,6 +207,16 @@
           "fieldName": "ADMIN_CASE_URI",
           "elementKind": "field",
           "justification": "Refactored case admin URI to allow fine grained control while keeping backward compatibility on existing endpoints"
+        },
+        {
+          "code": "java.method.numberOfParametersChanged",
+          "old": "method void org.kie.server.api.model.KieServerInfo::<init>(java.lang.String, java.lang.String, java.lang.String, java.util.List<java.lang.String>, java.lang.String)",
+          "new": "method void org.kie.server.api.model.KieServerInfo::<init>(java.lang.String, java.lang.String, java.lang.String, java.util.List<java.lang.String>, java.lang.String, java.lang.String)",
+          "package": "org.kie.server.api.model",
+          "classSimpleName": "KieServerInfo",
+          "methodName": "<init>",
+          "elementKind": "constructor",
+          "justification": "<<<<< ADD YOUR EXPLANATION FOR THE NECESSITY OF THIS CHANGE >>>>>"
         }
       ]
     }
